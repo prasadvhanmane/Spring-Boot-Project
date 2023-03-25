@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>User Registration</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+
+<style>
+.center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/index">SNT</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="/index">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="/registration">Register</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<h3 class="center">User details</h3>
+	<div>
+		<table class="table">
+			<tr class="table-primary">
+				<th>User-ID</th>
+				<th>Name</th>
+				<th>Password</th>
+				<th>Email/Username</th>
+				<th>Mobile</th>
+				<th>Role</th>
+				<th>Update</th>
+				<th>Delete</th>
+			</tr>
+
+			<tr th:each="user : ${users}">
+				<td th:text="${user.id}">0</td>
+				<td th:text="${user.name}">Name</td>
+				<td th:text="${user.password}">Password</td>
+				<td th:text="${user.email}">Email</td>
+				<td th:text="${user.mobile}">Mobile</td>
+				<td th:text="${user.role}">Role</td>
+				<td><a th:href="@{/update/{id}(id=${user.id})}"><button
+							class="btn btn-primary">Update</button></a></td>
+				<td><a th:href="@{/delete/{id}(id=${user.id})}"><button
+							class="btn btn-danger">Delete</button></a></td>
+			</tr>
+		</table>
+	</div>
+	<h3 class="center">Ongoing Project details</h3>
+	<div class="container" th:each="product : ${products}">
+		<div class="row">
+			<div class="col">
+				<img th:src="@{${product.picurl}}" alt="p1" width="300px"
+					height="350px">
+			</div>
+			<div class="col center" th:text="${product.content}">Information</div>
+			<div class="w-100"></div>
+		</div>
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+</body>
+</html>

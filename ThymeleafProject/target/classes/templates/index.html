@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="" th:href="@{/css/watch.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <title>INDIAN WATCH</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="#">INDIAN WATCHES</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/index">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#footer">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#footer">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/update/{id}(id=${#authentication.principal.id})}">Update</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+      <!-- Full Page Image Header with Vertically Centered Content -->
+      <header class="masthead">
+        <div class="container h-100">
+          <div class="row h-100 align-items-center">
+            <div class="col-12 text-center" sec:authorize="isAuthenticated()">
+              <h1 class="text-warning" th:text=" 'WELCOME  '+ ${#authentication.principal.name} "></h1>
+              <h1 class="text-warning">Watch Says Everything About You.</h1>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Page Content -->
+      <section class="py-5">
+        <div class="container">
+          <h2 class="fw-light">Page Content</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ab nulla dolorum autem nisi officiis
+            blanditiis voluptatem hic, assumenda aspernatur facere ipsam nemo ratione cumque magnam enim fugiat
+            reprehenderit expedita.</p>
+        </div>
+      </section>
+      <h1 align="center">New Launched Series</h1><br><br>
+      <div class="container" th:each="product : ${products}">
+        <div class="row">
+            <div class="col-sm-5 text-center">
+                <div class="col center" th:text="${product.content}">Information</div>
+                <br>
+            </div>
+            <div class="col-sm-7">
+                <img class="mx-auto d-block" th:src="@{${product.picurl}}" alt="p1" width="380" height="290">
+            </div>
+        </div>
+      <br><br>
+      </div>
+      
+    <div class="footer-dark">
+    <a name="footer"></a>
+      <footer>
+          <div class="container">
+              <div class="row">
+                  <div class="col-sm-6 col-md-3 item">
+                      <h3>Services</h3>
+                      <ul>
+                          <li><a href="#">Customized Watch</a></li>
+                          <li><a href="#">Watch Repair</a></li>
+                          <li><a href="#">Digital Watch</a></li>
+                      </ul>
+                  </div>
+                  <div class="col-sm-6 col-md-3 item">
+                      <h3>About</h3>
+                      <ul>
+                          <li><a href="#">Company</a></li>
+                          <li><a href="#">Team</a></li>
+                          <li><a href="#">Careers</a></li>
+                      </ul>
+                  </div>
+                  <div class="col-md-6 item text">
+                      <h3>Indian Watches</h3>
+                      <p>Inorbit Mall, First Floor Shop No.404,Vashi Navi Mumbai-400706</p>
+                  </div>
+                  <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+              </div>
+              <p class="copyright">INDIAN WATCHES © 2018</p>
+          </div>
+      </footer>
+  </div>
+</body>
+</html>
